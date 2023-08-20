@@ -1,6 +1,6 @@
 require 'discordrb'
 
-bot = Discordrb::Bot.new token: 'MTE0Mjg3Mzk0Nzk0MDA3MzU3Mg.Gv0nZe.x6iLXDFjUrzSyjvkFdYLGFMcp_eqe4f5JHN444'
+bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
 
 messages_array = []
 bot.ready do |event|
