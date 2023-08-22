@@ -2,4 +2,5 @@
 
 source "https://rubygems.org"
 
-gem "discordrb"
+gem "discordrb", "3.5.0"
+gem "google_drive", "3.0.7"
