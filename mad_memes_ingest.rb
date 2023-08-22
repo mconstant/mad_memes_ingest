@@ -47,6 +47,7 @@ puts "Step 2: yeet everything to sheets"
 # Load credentials from environment variables
 client_id = ENV['GOOGLE_CLIENT_ID']
 client_secret = ENV['GOOGLE_CLIENT_SECRET']
+refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
 
 # Authenticate and create a session
 puts "getting Google Drive Session"
