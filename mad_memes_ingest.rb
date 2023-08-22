@@ -29,7 +29,7 @@ begin
       else  
         channel.history(100, last_page&.sort_by(&:id)&.first&.id)    
       end  
-    end.to_a.map { |message| {author: message.author.display_name, content: message.content, attachments: message.attachments.map(&:url)} }
+    end.to_a.map { |message| {author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "IMAGE=(\"#{attachment.url}\")"}} }
 
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
