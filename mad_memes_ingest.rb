@@ -10,11 +10,6 @@ begin
   puts "Entering bot.ready block"
   bot.ready do |event|
     Discordrb::LOGGER.info("In bot.ready block")
-    Discordrb::LOGGER.info("Entering bot.on block")
-
-    Discordrb::LOGGER.info("In bot.on block")
-    Discordrb::LOGGER.info("Getting Bot Member")
-    interaction.member.fetch
 
     # Get a channel by its ID (replace 'CHANNEL_ID' with your channel's ID)
     Discordrb::LOGGER.info("Loading Memes Channel...")
