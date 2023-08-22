@@ -27,7 +27,7 @@ begin
       else  
         channel.history(100, last_page&.sort_by(&:id)&.first&.id)    
       end  
-    end.to_a.map(&:content)
+    end.to_a.map { |message| {author: message.author, content: message.content, attachments: message.attachments} }
 
     messages_array.flatten!
 
