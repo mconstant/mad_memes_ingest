@@ -61,7 +61,7 @@ end
 # For example, you can access a spreadsheet
 puts "Loading Spreadsheet"
 
-spreadsheet = session.spreadsheet_by_key("1o5Jvo-wSyNiCAzIDGFFqciGQqZ-2bF9is1WfCctdicc")
+spreadsheet = session.spreadsheet_by_title("madmemes0")
 puts "Loading Worksheet"
 worksheet = spreadsheet.worksheets[0]
 puts worksheet.title
