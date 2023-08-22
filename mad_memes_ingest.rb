@@ -52,7 +52,7 @@ refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
 # Authenticate and create a session
 puts "getting Google Drive Session"
 begin
-  session = GoogleDrive::Session.from_credentials(client_id, client_secret, refresh_token)
+  session = GoogleDrive::Session.from_service_account_key("google_sheets.json")
 rescue Exception => e
   puts e.backtrace.join("\n")
 end
