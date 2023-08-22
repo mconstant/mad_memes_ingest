@@ -15,14 +15,15 @@ begin
     Discordrb::LOGGER.info("Loading Memes Channel...")
     channel = bot.channel('837474873818349579')
 
-    Discordrb::LOGGER.info("Getting message content")
+    Discordrb::LOGGER.info("Getting message count")
     # Get Message Count
     message_count = channel.message_count
     Discordrb::LOGGER.info("The channel has #{message_count} messages.")
 
+
     Discordrb::LOGGER.info("Getting message content")
-    # Get the last 100 messages from the channel
-    messages = channel.history(100)
+    # Get the first 100 messages from the channel
+    messages = channel.history(100, nil, 837526522834845766, nil)
 
     Discordrb::LOGGER.info("Loading Message content into array")
     # Store the text of each message in the array
