@@ -49,11 +49,18 @@ client_id = ENV['GOOGLE_CLIENT_ID']
 client_secret = ENV['GOOGLE_CLIENT_SECRET']
 
 # Authenticate and create a session
-session = GoogleDrive::Session.from_credentials(client_id, client_secret, refresh_token)
+puts "getting Google Drive Session"
+begin
+  session = GoogleDrive::Session.from_credentials(client_id, client_secret, refresh_token)
+rescue Exception => e
+  puts e.backtrace.join("\n")
+end
 
 # Use the session to interact with Google Sheets API
 # For example, you can access a spreadsheet
+puts "Loading Spreadsheet"
 spreadsheet = session.spreadsheet_by_title("mad_memes_ingest_v0.0.1")
+puts "Loading Worksheet"
 worksheet = spreadsheet.worksheets[0]
 puts worksheet.title
 
