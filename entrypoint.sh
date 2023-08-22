@@ -12,4 +12,6 @@ GOOGLE_REFRESH_TOKEN=$(oauth2l fetch --scope https://www.googleapis.com/auth/dri
 
 export GOOGLE_REFRESH_TOKEN
 
-bundle exec ruby mad_memes_ingest.rb
+echo $GOOGLE_REFRESH_TOKEN
+
+GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN bundle exec ruby mad_memes_ingest.rb
