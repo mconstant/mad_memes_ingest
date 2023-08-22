@@ -18,9 +18,11 @@ bot.ready do |event|
     messages.each do |message|
       messages_array << message.content
     end
+
+    print messages_array
   end
 end
 
-print messages_array
-
 bot.run
+
+
