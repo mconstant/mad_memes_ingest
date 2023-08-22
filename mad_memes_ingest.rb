@@ -18,6 +18,7 @@ bot.ready do |event|
       messages_array << message.content
     end
 
+    puts "printing messages array:"
     print messages_array
   end
 end
