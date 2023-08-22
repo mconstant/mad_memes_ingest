@@ -1,4 +1,5 @@
 require 'discordrb'
+require 'google_drive'
 
 begin
   puts "Instantiating Bot"
