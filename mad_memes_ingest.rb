@@ -1,5 +1,5 @@
-require 'discordrb'
-require 'google_drive'
+require 'bundler'
+Bundler.require
 
 puts "Declaring empty messages_array"
 messages_array = nil
