@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Bash 'Strict Mode'
 # http://redsymbol.net/articles/unofficial-bash-strict-mode
