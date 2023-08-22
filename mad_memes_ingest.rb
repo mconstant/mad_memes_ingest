@@ -66,10 +66,10 @@ puts "Loading Worksheet"
 worksheet = spreadsheet.worksheets[0]
 puts worksheet.title
 
-worksheet.insert_rows(0, [["Author", "Content", "Attachments"]])
+worksheet.insert_rows(1, [["Author", "Content", "Attachments"]])
 
 messages_array.each_with_index do |row, idx|
-  worksheet.insert_rows((idx+1), [[row[:author], row[:content], row[:attachments]]])
+  worksheet.insert_rows((idx+2), [[row[:author], row[:content], row[:attachments]]])
 end
 
 worksheet.save
