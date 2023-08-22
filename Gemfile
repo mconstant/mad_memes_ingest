@@ -3,4 +3,4 @@
 source "https://rubygems.org"
 
 gem "discordrb", "~> 3.5"
-gem "googleauth", "~> 1.7"
+gem "google_drive", '~> 3.0'

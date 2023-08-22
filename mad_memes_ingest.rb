@@ -1,12 +1,13 @@
 require 'discordrb'
 require 'google_drive'
 
+puts "Declaring empty messages_array"
+messages_array = nil
+
+puts "Step 1: Discord Bot gets the messages in the #Memes channel..."
 begin
   puts "Instantiating Bot"
   bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
-
-  puts "Declaring empty messages_array"
-  messages_array = nil
 
   puts "Entering bot.ready block"
   bot.ready do |event|
@@ -41,5 +42,27 @@ rescue Exception => e
   puts "had to rescue!"
   puts "Exception:\n#{e.backtrace.join("\n")}"
 end
+
+puts "Step 2: yeet everything to sheets"
+# Load credentials from environment variables
+client_id = ENV['GOOGLE_CLIENT_ID']
+client_secret = ENV['GOOGLE_CLIENT_SECRET']
+
+# Authenticate and create a session
+session = GoogleDrive::Session.from_credentials(client_id, client_secret, refresh_token)
+
+# Use the session to interact with Google Sheets API
+# For example, you can access a spreadsheet
+spreadsheet = session.spreadsheet_by_title("mad_memes_ingest_v0.0.1")
+worksheet = spreadsheet.worksheets[0]
+puts worksheet.title
+
+worksheet.insert_rows(0, [[Author", "Content", "Attachments"]])
+
+messages_array.each_with_index do |row, idx|
+  worksheet.insert_rows((idx+1), [[row[:author], row[:content], row[:attachments]])
+end
+
+worksheet.save
 
 
