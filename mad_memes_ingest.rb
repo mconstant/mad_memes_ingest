@@ -57,7 +57,7 @@ spreadsheet = session.spreadsheet_by_title("mad_memes_ingest_v0.0.1")
 worksheet = spreadsheet.worksheets[0]
 puts worksheet.title
 
-worksheet.insert_rows(0, [[Author", "Content", "Attachments"]])
+worksheet.insert_rows(0, [["Author", "Content", "Attachments"]])
 
 messages_array.each_with_index do |row, idx|
   worksheet.insert_rows((idx+1), [[row[:author], row[:content], row[:attachments]])
