@@ -8,11 +8,15 @@ on:
 
 jobs:
 
-  build:
+  build-and-run:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag mad_memes_ingest:$(date +%s)
+    - name: Build and Run the Docker image
+      env:
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build . --build-arg BOT_TOKEN=${{ secrets.BOT_TOKEN }} --file Dockerfile --tag mad_memes_ingest:$IMAGE_TAG
+        docker run mad_memes_ingest:$IMAGE_TAG
