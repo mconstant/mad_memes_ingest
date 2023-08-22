@@ -69,8 +69,8 @@ puts worksheet.title
 worksheet.insert_rows(1, [["Author", "Rarity (1 is rarest)", "Content", "Attachments"]])
 
 messages_array.each_with_index do |row, idx|
-  row[:attachments].each do |attachment|
-    worksheet.insert_rows((idx+2), [[row[:author], "",row[:content], attachment]])
+  row[:attachments].each_with_index do |attachment, idx2|
+    worksheet.insert_rows((idx+idx2+2), [[row[:author], "",row[:content], attachment]])
   end
 end
 
