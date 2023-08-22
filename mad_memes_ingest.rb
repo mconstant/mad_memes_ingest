@@ -20,16 +20,16 @@ begin
     message_count = channel.message_count
     Discordrb::LOGGER.info("The channel has #{message_count} messages.")
 
-
     Discordrb::LOGGER.info("Getting message content")
-    # Get the first 100 messages from the channel
-    messages = channel.history(100, nil, 837526522834845766, nil)
+    messages_array << Discordrb::Paginator.new(nil, :up) do |last_page|
+      if last_page && last_page.count < 100  
+        []
+      else  
+        channel.history(100, last_page&.sort_by(&:id)&.first&.id)    
+      end  
+    end.to_a.map(&:content)
 
-    Discordrb::LOGGER.info("Loading Message content into array")
-    # Store the text of each message in the array
-    messages.each do |message|
-      messages_array << message.content
-    end
+    messages_array.flatten!
 
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
