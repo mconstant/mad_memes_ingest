@@ -34,8 +34,6 @@ begin
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
 
-    sleep 20
-
     bot.stop
   end
 
