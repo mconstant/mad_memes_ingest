@@ -11,7 +11,7 @@ ENV BOT_TOKEN=$BOT_TOKEN
 ENV GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
 ENV GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
 
-COPY --from gcr.io/oauth2l/oauth2l /bin/oauth2l /bin/oauth2l
+COPY --from=gcr.io/oauth2l/oauth2l /bin/oauth2l /bin/oauth2l
 
 COPY . .
 
