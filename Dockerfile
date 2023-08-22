@@ -4,7 +4,7 @@ ARG BOT_TOKEN
 ARG GOOGLE_SHEETS_JSON
 
 RUN apt-get update
-RUN apt-get install -y build-essential bash libsodium-dev
+RUN apt-get install -y build-essential bash libsodium-dev coreutils
 
 ENV BOT_TOKEN=$BOT_TOKEN
 ENV GOOGLE_SHEETS_JSON=$GOOGLE_SHEETS_JSON
