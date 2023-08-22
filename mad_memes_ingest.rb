@@ -11,30 +11,29 @@ begin
   bot.ready do |event|
     Discordrb::LOGGER.info("In bot.ready block")
     Discordrb::LOGGER.info("Entering bot.on block")
-    bot.on do |interaction|
-      Discordrb::LOGGER.info("In bot.on block")
-      Discordrb::LOGGER.info("Getting Bot Member")
-      interaction.member.fetch
 
-      # Get a channel by its ID (replace 'CHANNEL_ID' with your channel's ID)
-      Discordrb::LOGGER.info("Loading Memes Channel...")
-      channel = bot.channel('837474873818349579')
+    Discordrb::LOGGER.info("In bot.on block")
+    Discordrb::LOGGER.info("Getting Bot Member")
+    interaction.member.fetch
 
-      Discordrb::LOGGER.info("Getting message content")
-      # Get the last 100 messages from the channel
-      messages = channel.history(100)
+    # Get a channel by its ID (replace 'CHANNEL_ID' with your channel's ID)
+    Discordrb::LOGGER.info("Loading Memes Channel...")
+    channel = bot.channel('837474873818349579')
 
-      Discordrb::LOGGER.info("Loading Message content into array")
-      # Store the text of each message in the array
-      messages.each do |message|
-        messages_array << message.content
-      end
+    Discordrb::LOGGER.info("Getting message content")
+    # Get the last 100 messages from the channel
+    messages = channel.history(100)
 
-      Discordrb::LOGGER.info("Printing messages array:")
-      Discordrb::LOGGER.info(messages_array.join("\n"))
-
-      bot.stop
+    Discordrb::LOGGER.info("Loading Message content into array")
+    # Store the text of each message in the array
+    messages.each do |message|
+      messages_array << message.content
     end
+
+    Discordrb::LOGGER.info("Printing messages array:")
+    Discordrb::LOGGER.info(messages_array.join("\n"))
+
+    bot.stop
   end
 
   bot.run
