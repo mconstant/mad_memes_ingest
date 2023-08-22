@@ -16,6 +16,11 @@ begin
     channel = bot.channel('837474873818349579')
 
     Discordrb::LOGGER.info("Getting message content")
+    # Get Message Count
+    message_count = channel.message_count
+    Discordrb::LOGGER.info("The channel has #{message_count} messages.")
+
+    Discordrb::LOGGER.info("Getting message content")
     # Get the last 100 messages from the channel
     messages = channel.history(100)
 
