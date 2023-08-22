@@ -7,15 +7,15 @@ messages_array = nil
 puts "Step 1: Discord Bot gets the messages in the #Memes channel..."
 begin
   puts "Instantiating Bot"
-  @bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
+  bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
 
   puts "Entering bot.ready block"
-  @bot.ready do |event|
+  bot.ready do |event|
     Discordrb::LOGGER.info("In bot.ready block")
 
     # Get a channel by its ID (replace 'CHANNEL_ID' with your channel's ID)
     Discordrb::LOGGER.info("Loading Memes Channel...")
-    channel = @bot.channel('837474873818349579')
+    channel = bot.channel('837474873818349579')
 
     Discordrb::LOGGER.info("Getting message count")
     # Get Message Count
@@ -34,10 +34,12 @@ begin
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
 
-    
+    sleep 20
+
+    bot.stop
   end
 
-  @bot.run
+  bot.run
 rescue Exception => e
   puts "had to rescue!"
   puts "Exception:\n#{e.backtrace.join("\n")}"
@@ -76,4 +78,4 @@ end
 
 worksheet.save
 
-@bot.stop
+
