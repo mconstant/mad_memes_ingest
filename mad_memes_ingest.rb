@@ -4,9 +4,8 @@ bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
 
 messages_array = []
 bot.ready do |event|
-  begin
-    bot.member(id)
-  rescue
+  client.on :interaction_create do |interaction|
+    interaction.member.fetch
 
     # Get a channel by its ID (replace 'CHANNEL_ID' with your channel's ID)
     channel = bot.channel('837474873818349579')
