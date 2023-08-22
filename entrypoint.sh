@@ -8,6 +8,8 @@ set -o errexit
 set -o pipefail
 IFS=$'\n\t'
 
+echo $GOOGLE_SHEETS_JSON
+
 echo $GOOGLE_SHEETS_JSON > google_sheets.json
 
 bundle exec ruby mad_memes_ingest.rb
