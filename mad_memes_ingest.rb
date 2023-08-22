@@ -60,6 +60,7 @@ end
 # Use the session to interact with Google Sheets API
 # For example, you can access a spreadsheet
 puts "Loading Spreadsheet"
+
 spreadsheet = session.spreadsheet_by_key("1o5Jvo-wSyNiCAzIDGFFqciGQqZ-2bF9is1WfCctdicc")
 puts "Loading Worksheet"
 worksheet = spreadsheet.worksheets[0]
