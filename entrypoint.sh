@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 IFS=$'\n\t'
 
-echo $GOOGLE_SHEETS_JSON
+env
 
 echo $GOOGLE_SHEETS_JSON > google_sheets.json
 
