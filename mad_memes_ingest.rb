@@ -70,7 +70,7 @@ worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity (1 is rarest)", "Conte
 
 messages_array.each_with_index do |row, idx|
   row[:attachments].each_with_index do |attachment,idx2|
-    worksheet.insert_rows((idx+idx2+2), [[row[:timestamp], row[:author], "",row[:content], attachment]])
+    worksheet.insert_rows((idx+idx2+2), [[row[:timestamp], row[:author], (1 + rand(100)),row[:content], attachment]])
   end
 end
 
