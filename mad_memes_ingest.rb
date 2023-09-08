@@ -29,7 +29,7 @@ begin
       else
         channel.history(100, last_page&.sort_by(&:id)&.first&.id)
       end
-    end.to_a.map { |message| { timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")" } } }
+    end.to_a.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
 
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
@@ -69,7 +69,9 @@ puts worksheet.title
 worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity (1 is rarest)", "Content", "Attachments"]])
 
 messages_array.each_with_index do |row, idx|
-  worksheet.insert_rows((idx + 2), [[row[:timestamp], row[:author], (1 + rand(100)), row[:content], attachment]])
+  row[:attachments].each do |attachment|
+    worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], (1 + rand(100)),row[:content], attachment]])
+  end
 end
 
 worksheet.save
