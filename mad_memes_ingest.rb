@@ -24,12 +24,12 @@ begin
 
     Discordrb::LOGGER.info("Getting message content")
     messages_array = Discordrb::Paginator.new(nil, :up) do |last_page|
-      if last_page && last_page.count < 100  
+      if last_page && last_page.count < 100
         []
-      else  
-        channel.history(100, last_page&.sort_by(&:id)&.first&.id)    
-      end  
-    end.to_a.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
+      else
+        channel.history(100, last_page&.sort_by(&:id)&.first&.id)
+      end
+    end.to_a.map { |message| { timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")" } } }
 
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
@@ -69,9 +69,7 @@ puts worksheet.title
 worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity (1 is rarest)", "Content", "Attachments"]])
 
 messages_array.each_with_index do |row, idx|
-  row[:attachments].each_with_index do |attachment,idx2|
-    worksheet.insert_rows((idx+idx2+2), [[row[:timestamp], row[:author], (1 + rand(100)),row[:content], attachment]])
-  end
+  worksheet.insert_rows((idx + 2), [[row[:timestamp], row[:author], (1 + rand(100)), row[:content], attachment]])
 end
 
 worksheet.save
