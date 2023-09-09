@@ -66,11 +66,67 @@ puts "Loading Worksheet"
 worksheet = spreadsheet.worksheets[0]
 puts worksheet.title
 
-worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity (1 is rarest)", "Content", "Attachments"]])
+worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity Number", "Rareness Class", "Content", "Attachments"]])
+
+messages_count = messages_array.count
+
+tiers = 5
+r = (1.0 / tiers) ** (1.0 / (n - 1))
+
+thresholds = []
+current_threshold = 1.0
+
+tiers.times do
+  thresholds << current_threshold
+  current_threshold *= r
+end
+
+def categorize_rarity(rarity, thresholds)
+  case
+  when rarity < thresholds[0]
+    "Common"
+  when rarity < thresholds[1]
+    "Uncommon"
+  when rarity < thresholds[2]
+    "Rare"
+  when rarity < thresholds[3]
+    "Epic"
+  else
+    "Legendary"
+  end
+end
+
+# Example: Set the max rarity number (n)
+n = messages_count
+
+# Calculate the common ratio (r)
+tiers = 5
+r = (1.0 / tiers) ** (1.0 / (n - 1))
+
+# Calculate rarity thresholds
+thresholds = []
+current_threshold = 1.0
+
+tiers.times do
+  thresholds << current_threshold
+  current_threshold *= r
+end
+
+# Test with sample rarities
+sample_rarities = [1, 50, 200, 500]
+
+sample_rarities.each do |rarity|
+  category = categorize_rarity(rarity, thresholds)
+  puts "Rarity #{rarity} belongs to #{category} category."
+end
+
+rarity_bag = (1..messages_count).to_a.shuffle
 
 messages_array.each_with_index do |row, idx|
+  rarity = rarity_bag.pop
+  category = categorize_rarity(rarity, thresholds)
   row[:attachments].each do |attachment|
-    worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], (1 + rand(1000000)),row[:content], attachment]])
+    worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], rarity_bag.pop, category, row[:content], attachment]])
   end
 end
 
