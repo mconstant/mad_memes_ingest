@@ -31,6 +31,8 @@ begin
       end
     end.to_a.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
 
+    messages_array = messages_array.reject {|message| message[:attachments].nil? }
+
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
 
@@ -129,6 +131,15 @@ messages_array.each_with_index do |row, idx|
   row[:attachments].each do |attachment|
     worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], rarity_bag.pop, category, row[:content], attachment]])
   end
+end
+
+rarity_bag = (1..(worksheet.num_rows-1)).to_a.shuffle
+
+(2..(worksheet.num_rows)).to_a.each do |row|
+  rarity = rarity_bag.pop
+  puts "randomly selected rarity is #{rarity}"
+  category = categorize_rarity(rarity, thresholds)
+  worksheet.update_cells(row, 2, [[rarity, category]])
 end
 
 worksheet.save
