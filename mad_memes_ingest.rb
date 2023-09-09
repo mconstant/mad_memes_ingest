@@ -68,12 +68,17 @@ puts worksheet.title
 
 worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity Number", "Rareness Class", "Content", "Attachments"]])
 
-messages_count = messages_array.count
+memes_count =  0
+messages_array.each do |row|
+  row[:attachments].each do |attachment|
+    memes_count += 1
+  end
+end
 
-puts "message count is #{messages_count}"
+puts "memes count is #{memes_count}"
 
 # Example: Set the max rarity number (n)
-n = messages_count
+n = memes_count
 
 tiers = 5
 r = (1.0 / tiers) ** (0.38)
@@ -115,7 +120,7 @@ sample_rarities.each do |rarity|
   puts "Rarity #{rarity} belongs to #{category} category."
 end
 
-rarity_bag = (1..messages_count).to_a.shuffle
+rarity_bag = (1..memes_count).to_a.shuffle
 
 messages_array.each_with_index do |row, idx|
   rarity = rarity_bag.pop
