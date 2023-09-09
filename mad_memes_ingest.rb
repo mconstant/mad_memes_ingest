@@ -122,16 +122,20 @@ sample_rarities.each do |rarity|
   puts "Rarity #{rarity} belongs to #{category} category."
 end
 
-rarity_bag = (1..memes_count).to_a.shuffle
+rarity_bag = (1..memes_count+1000).to_a.shuffle
 
+pick_count = 0
 messages_array.each_with_index do |row, idx|
   row[:attachments].each do |attachment|
     rarity = rarity_bag.pop
+    pick_count += 1
     puts "randomly selected rarity is #{rarity}"
     category = categorize_rarity(rarity, thresholds)
     worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], rarity_bag.pop, category, row[:content], attachment]])
   end
 end
+
+puts "would have picked #{pick_count} times from a bag of size #{memes_count}"
 
 worksheet.save
 
