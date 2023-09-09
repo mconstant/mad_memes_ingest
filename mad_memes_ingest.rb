@@ -70,6 +70,9 @@ worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity Number", "Rareness Cla
 
 messages_count = messages_array.count
 
+# Example: Set the max rarity number (n)
+n = messages_count
+
 tiers = 5
 r = (1.0 / tiers) ** (1.0 / (n - 1))
 
@@ -94,22 +97,6 @@ def categorize_rarity(rarity, thresholds)
   else
     "Legendary"
   end
-end
-
-# Example: Set the max rarity number (n)
-n = messages_count
-
-# Calculate the common ratio (r)
-tiers = 5
-r = (1.0 / tiers) ** (1.0 / (n - 1))
-
-# Calculate rarity thresholds
-thresholds = []
-current_threshold = 1.0
-
-tiers.times do
-  thresholds << current_threshold
-  current_threshold *= r
 end
 
 # Test with sample rarities
