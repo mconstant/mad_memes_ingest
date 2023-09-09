@@ -122,7 +122,7 @@ sample_rarities.each do |rarity|
   puts "Rarity #{rarity} belongs to #{category} category."
 end
 
-rarity_bag = (1..memes_count+1000).to_a.shuffle
+rarity_bag = (1..memes_count+1).to_a.shuffle
 
 pick_count = 0
 messages_array.each_with_index do |row, idx|
