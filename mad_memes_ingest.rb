@@ -135,7 +135,7 @@ messages_array.each_with_index do |row, idx|
   end
 end
 
-puts "would have picked #{pick_count} times from a bag of size #{memes_count}"
+puts "would have picked #{pick_count} times from a bag of size #{(1..memes_count+1).to_a.shuffle.count}"
 
 worksheet.save
 
