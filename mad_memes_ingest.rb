@@ -76,7 +76,7 @@ puts "message count is #{messages_count}"
 n = messages_count
 
 tiers = 5
-r = (1.0 / tiers) ** (1.0 / (n - 1))
+r = (1.0 / tiers) ** (0.38)
 
 thresholds = []
 current_threshold = 1.0
@@ -86,23 +86,29 @@ tiers.times do
   current_threshold *= r
 end
 
+thresholds = thresholds.map {|thresh| thresh * n}.reverse
+
 def categorize_rarity(rarity, thresholds)
   case
   when rarity < thresholds[0]
-    "Common"
+    "Legendary"
   when rarity < thresholds[1]
-    "Uncommon"
+    "Epic"
   when rarity < thresholds[2]
     "Rare"
   when rarity < thresholds[3]
-    "Epic"
+    "Uncommon"
   else
-    "Legendary"
+    "Common"
   end
 end
 
+puts "Thresholds:"
+print thresholds
+puts
+
 # Test with sample rarities
-sample_rarities = [1, 50, 200, 500]
+sample_rarities = [1, 50, 120, 200, 500]
 
 sample_rarities.each do |rarity|
   category = categorize_rarity(rarity, thresholds)
