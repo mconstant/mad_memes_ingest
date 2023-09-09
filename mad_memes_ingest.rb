@@ -119,6 +119,7 @@ rarity_bag = (1..messages_count).to_a.shuffle
 
 messages_array.each_with_index do |row, idx|
   rarity = rarity_bag.pop
+  puts "randomly selected rarity is #{rarity}"
   category = categorize_rarity(rarity, thresholds)
   row[:attachments].each do |attachment|
     worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], rarity_bag.pop, category, row[:content], attachment]])
