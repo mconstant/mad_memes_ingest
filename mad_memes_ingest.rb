@@ -70,6 +70,8 @@ worksheet.insert_rows(1, [["Timestamp", "Author", "Rarity Number", "Rareness Cla
 
 messages_count = messages_array.count
 
+puts "message count is #{messages_count}"
+
 # Example: Set the max rarity number (n)
 n = messages_count
 
