@@ -80,7 +80,7 @@ end
 puts "memes count is #{memes_count}"
 
 # Example: Set the max rarity number (n)
-n = memes_count
+n = memes_count + 1000
 
 tiers = 5
 r = (1.0 / tiers) ** (0.38)
@@ -115,14 +115,14 @@ print thresholds
 puts
 
 # Test with sample rarities
-sample_rarities = [1, 50, 120, 200, 500]
+sample_rarities = [1, 50, 120, 200, 500, 1200, 1500]
 
 sample_rarities.each do |rarity|
   category = categorize_rarity(rarity, thresholds)
   puts "Rarity #{rarity} belongs to #{category} category."
 end
 
-rarity_bag = (1..(memes_count+200)).to_a.shuffle
+rarity_bag = (1..(memes_count+1000)).to_a.shuffle
 
 pick_count = 0
 messages_array.each_with_index do |row, idx|
