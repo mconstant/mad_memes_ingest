@@ -136,7 +136,8 @@ rarity_bag = (1..(worksheet.num_rows-1)).to_a.shuffle
   pick_count += 1
   puts "randomly selected rarity is #{rarity}"
   category = categorize_rarity(rarity, thresholds)
-  worksheet.update_cells(row, 2, [[rarity],[category]])
+  worksheet.update_cells(row, 2, [[rarity]])
+  worksheet.update_cells(row, 3, [[category]])
 end
 
 puts "would have picked #{pick_count} times from a bag of size #{(1..(worksheet.num_rows-1)).to_a.shuffle.count}"
