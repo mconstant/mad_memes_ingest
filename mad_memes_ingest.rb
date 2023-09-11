@@ -125,8 +125,7 @@ end
 pick_count = 0
 messages_array.each_with_index do |row, idx|
   row[:attachments].each do |attachment|
-    category = categorize_rarity(rarity, thresholds)
-    worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], rarity_bag.pop, category, row[:content], attachment]])
+    worksheet.insert_rows((idx+2), [[row[:timestamp], row[:author], "", "", row[:content], attachment]])
   end
 end
 
