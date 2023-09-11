@@ -80,7 +80,7 @@ end
 puts "memes count is #{memes_count}"
 
 # Example: Set the max rarity number (n)
-n = memes_count + 1000
+n = memes_count
 
 tiers = 5
 r = (1.0 / tiers) ** (0.38)
