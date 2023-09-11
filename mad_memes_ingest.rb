@@ -95,6 +95,9 @@ end
 
 thresholds = thresholds.map {|thresh| thresh * n}.reverse
 
+# actually just hardcode rarities
+thresholds = [19.1, 62.1, 132.1, 389.1]
+
 def categorize_rarity(rarity, thresholds)
   case
   when rarity < thresholds[0]
