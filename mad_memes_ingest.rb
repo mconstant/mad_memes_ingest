@@ -83,7 +83,7 @@ puts "memes count is #{memes_count}"
 n = memes_count
 
 tiers = 5
-r = (1.0 / tiers) ** (0.38)
+r = (1.0 / tiers) ** (0.46)
 
 thresholds = []
 current_threshold = 1.0
