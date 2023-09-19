@@ -29,12 +29,16 @@ begin
       else
         channel.history(100, last_page&.sort_by(&:id)&.first&.id)
       end
-    end.to_a.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
+    end.to_a.reject do |message|
+      message.attachments.any? do |attachment|
+        extension = attachment.split('.').last.chomp
+        puts "Reject extension is #{extension}"
+        (extension == "mp4") || (extension == "webm")
+      end
+    end.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
 
-    messages_array = messages_array.reject do |message| 
-      extension = message[:attachments].match(/IMAGE\(\"(.+)\"/)[1].split('.').last.chomp
-      puts "Reject extension is #{extension}"
-      message[:attachments].nil? || message[:attachments].empty? || (extension == "mp4") || (extension == "webm")
+    messages_array = messages_array.reject do |message|
+      message[:attachments].nil? || message[:attachments].empty?
     end
 
     Discordrb::LOGGER.info("Printing messages array:")
