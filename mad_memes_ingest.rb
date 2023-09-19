@@ -31,7 +31,11 @@ begin
       end
     end.to_a.map { |message| {timestamp: message.timestamp.strftime("%Y%jT%H%MZ"), author: message.author.display_name, content: message.content, attachments: message.attachments.map { |attachment| "=IMAGE(\"#{attachment.url}\")"}} }
 
-    messages_array = messages_array.reject {|message| message[:attachments].nil? || message[:attachments].empty? }
+    messages_array = messages_array.reject do |message| 
+      extension = nft["Attachments"].match(/IMAGE\(\"(.+)\"/)[1].split('.').last.chomp
+      puts "Reject extension is #{extension}"
+      message[:attachments].nil? || message[:attachments].empty? || (extension == "mp4") || (extension == "webm")
+    end
 
     Discordrb::LOGGER.info("Printing messages array:")
     Discordrb::LOGGER.info(messages_array.join("\n"))
